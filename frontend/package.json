@@ -10,6 +10,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
+    "history": "^5.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.1.2",
@@ -22,7 +23,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier:base": "prettier --ignore-path ../.gitignore",
+    "eslint:base": "eslint --ignore-path ../.gitignore",
+    "lint:eslint": "yarn eslint:base -- --max-warnings 0 \"**/*.{js,ts,tsx,mdx}\"",
+    "lint:eslint-config-prettier": "eslint --print-config .eslintrc | eslint-config-prettier-check",
+    "lint": "yarn lint:eslint",
+    "format:prettier": "yarn prettier:base -- --write \"**/*.{js,ts,tsx,json,md,mdx}\"",
+    "format:eslint": "yarn eslint:base -- --fix \"**/*.{js,ts,tsx,mdx}\"",
+    "format": "yarn format:eslint && yarn format:prettier"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +53,36 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
-    "@types/react-transition-group": "^4.4.4"
+    "@types/react-transition-group": "^4.4.4",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.5.0",
+    "stylelint": "^14.1.0",
+    "stylelint-config-standard": "^24.0.0",
+    "stylelint-prettier": "^2.0.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "yarn eslint:base -- --fix --max-warnings 0",
+      "yarn prettier:base -- --write"
+    ],
+    "*.{json,md,mdx}": [
+      "yarn prettier:base -- --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

@@ -1,10 +1,6 @@
-import { FunctionComponent } from "react";
-import "./MainHeader.css";
+import { FunctionComponent } from 'react';
+import './MainHeader.css';
 
-export const MainHeader: FunctionComponent = ({ children }) => {
-  return (
-    <header className="main-header">
-      { children }
-    </header>
-  );
-};
+export const MainHeader: FunctionComponent = ({ children }) => (
+  <header className="main-header">{children}</header>
+);

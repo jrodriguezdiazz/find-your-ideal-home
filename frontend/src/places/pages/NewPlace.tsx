@@ -1,7 +1,5 @@
-export const NewPlace = () => {
-  return (
-    <div>
-      <h1>FF</h1>
-    </div>
-  )
-}
+export const NewPlace = () => (
+  <div>
+    <h1>FF</h1>
+  </div>
+);
