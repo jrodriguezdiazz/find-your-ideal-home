@@ -1,0 +1,23 @@
+name: CI ~ Validate Code Style
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - frontend/**
+
+jobs:
+  build:
+    name: Check code style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install Dependencies
+        working-directory: ./frontend
+        run: yarn install
+
+      - name: Running Prettier and Eslint
+        working-directory: ./frontend
+        run: yarn format
